@@ -3,7 +3,7 @@
 	"version": "4.0.0-beta.0",
 	"description": "Phylum cli",
 	"bin": {
-		"phylum": "./dist/index.js"
+		"phylum": "./dist/cli.js"
 	},
 	"scripts": {
 		"compile": "rimraf dist && tsc",
