@@ -25,25 +25,22 @@ export class Command {
 	flag(name: string): boolean {
 		return this._args.has(name);
 	}
-}
 
-export function parseCommand(argv: string[]): Command {
-	const command = new Command();
-
-	let target = command.ensure('run');
-	for (const arg of argv) {
-		if (/--[^-]/.test(arg)) {
-			const separator = arg.indexOf('=');
-			if (separator < 0) {
-				target = command.ensure(arg.slice(2));
+	static parse(argv: string[], defaultName: string) {
+		const command = new Command();
+		let target = command.ensure(defaultName);
+		for (const arg of argv) {
+			if (/--[^-]/.test(arg)) {
+				const separator = arg.indexOf('=');
+				if (separator < 0) {
+					target = command.ensure(arg.slice(2));
+				} else {
+					command.ensure(arg.slice(2, separator)).push(arg.slice(separator + 1));
+				}
 			} else {
-				command.ensure(arg.slice(2, separator)).push(arg.slice(separator + 1));
+				target.push(arg);
 			}
-		} else {
-			target.push(arg);
 		}
+		return command;
 	}
-
-	// command.ensure('run').push(...argv);
-	return command;
 }

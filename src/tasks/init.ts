@@ -1,13 +1,13 @@
 
 import { Container, Task, InstanceClass } from '@phylum/pipeline';
-import { parseCommand, Command } from '../command';
+import { Command } from '../command';
 import { resolve } from 'path';
 
 export class InitTask extends Task<Array<Task<any>>> {
 	public command: Command;
 
 	async run() {
-		this.command = parseCommand(process.argv.slice(2));
+		this.command = Command.parse(process.argv.slice(2), 'run');
 		const run = this.command.strings('run');
 		if (run.length === 0) {
 			throw new Error(`At least one task module must be specified.`);
