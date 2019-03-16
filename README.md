@@ -21,7 +21,7 @@ phylum <...task-modules>
 
 ## Task modules
 A task module's default export must be a task implementation:
-```ts
+```js
 'use strict';
 
 const { Task } = require('@phylum/pipeline');
@@ -35,6 +35,28 @@ exports.default = class MyTask extends Task {
 ```bash
 phylum example.js
 # => Hello World!
+```
+
+## Command line args
+```js
+'use strict';
+
+const { Task } = require('@phylum/pipeline');
+const { getCommand } = require('@phylum/cli');
+
+exports.default = class MyTask extends Task {
+	async run() {
+		const command = getCommand(this);
+		console.log(command.string('message', 'Hello World!'));
+	}
+}
+```
+```bash
+phylum example.js
+# => Hello World!
+
+phylum example.js --message "Foo, bar"
+# => Foo, bar
 ```
 
 ## Containers
