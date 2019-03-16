@@ -15,15 +15,23 @@ Currently, only plain javascript (or precompiled code) is supported.
 
 # Usage
 ```bash
-# Run one or more task modules:
-phylum [[--run] <...task-modules>]
+phylum [...args]
 ```
-+ `task-modules` - One or more task modules to run. Defaults to `"pipeline"`.
+The optional configuration (**phylum.json**) is read from the current working directory:
+```js
+{
+	// The task modules to run.
+	// - can be a string or an array of strings.
+	// - Cli usage: --run <...>
+	"run": ["./pipeline"]
+}
+```
 
 ## Task modules
 A task module's default export must be a task implementation:
 ```js
 'use strict';
+// example.js
 
 const { Task } = require('@phylum/pipeline');
 
@@ -34,13 +42,14 @@ exports.default = class MyTask extends Task {
 }
 ```
 ```bash
-phylum example.js
+phylum example
 # => Hello World!
 ```
 
-## Command line args
+## Configuration API
 ```js
 'use strict';
+// example.js
 
 const { Task } = require('@phylum/pipeline');
 const { ConfigTask } = require('@phylum/cli');
@@ -48,19 +57,44 @@ const { ConfigTask } = require('@phylum/cli');
 exports.default = class MyTask extends Task {
 	async run() {
 		// Get the results from the cli configuration task:
-		const {command} = await this.use(ConfigTask);
+		const {command, config, tasks} = await this.use(ConfigTask);
+		/*
+			# command:
+			An object exposing parsed command line args.
 
+			# config:
+			An object exposing the normalized configuration.
+
+			# tasks:
+			An array of task instances that were run.
+		*/
+
+		// Example usage:
 		console.log(command.string('message', 'Hello World!'));
 	}
 }
 ```
 ```bash
-phylum example.js
+phylum example
 # => Hello World!
 
-phylum example.js --message "Foo, bar"
+phylum example --message "Foo, bar"
 # => Foo, bar
 ```
 
 ## Containers
-Every task module will run in it's own unique container.
+Every task module will run in it's own isolated container.<br>
+The top-level container can be accessed using the config task:
+```ts
+'use strict';
+// example.js
+
+const { Task } = require('@phylum/pipeline');
+const { ConfigTask } = require('@phylum/cli');
+
+exports.default = class MyTask extends Task {
+	async run() {
+		const topLevelContainer = this.container.get(ConfigTask).container;
+	}
+}
+```
