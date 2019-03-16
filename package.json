@@ -2,7 +2,6 @@
 	"name": "@phylum/cli",
 	"version": "4.0.0-beta.0",
 	"description": "Phylum cli",
-	"main": "./dist/index.js",
 	"bin": {
 		"phylum": "./dist/cli.js"
 	},
@@ -15,8 +14,10 @@
 	},
 	"dependencies": {
 		"@types/command-line-args": "^5.0.0",
+		"@types/fs-extra": "^5.0.5",
 		"@types/node": "^10.12.30",
-		"command-line-args": "^5.0.2"
+		"command-line-args": "^5.0.2",
+		"fs-extra": "^7.0.1"
 	},
 	"devDependencies": {
 		"@phylum/pipeline": "^4.0.0-beta.9",

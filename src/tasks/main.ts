@@ -1,10 +1,10 @@
 
 import { Task } from '@phylum/pipeline';
-import { InitTask } from './init';
+import { ConfigTask } from './config';
 
 export class MainTask extends Task<void> {
 	async run() {
-		const tasks = await this.use(InitTask);
+		const {tasks} = await this.use(ConfigTask);
 		for (const task of tasks) {
 			await this.useSource(task);
 		}

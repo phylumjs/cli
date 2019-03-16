@@ -22,13 +22,13 @@ export class Command {
 		return Number(this.string(name) || defaultValue);
 	}
 
-	flag(name: string): boolean {
+	has(name: string): boolean {
 		return this._args.has(name);
 	}
 
 	static parse(argv: string[], defaultName: string) {
 		const command = new Command();
-		let target = command.ensure(defaultName);
+		let target: string[];
 		for (const arg of argv) {
 			if (/--[^-]/.test(arg)) {
 				const separator = arg.indexOf('=');
@@ -38,6 +38,9 @@ export class Command {
 					command.ensure(arg.slice(2, separator)).push(arg.slice(separator + 1));
 				}
 			} else {
+				if (!target) {
+					target = command.ensure(defaultName);
+				}
 				target.push(arg);
 			}
 		}

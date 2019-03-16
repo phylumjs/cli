@@ -16,8 +16,9 @@ Currently, only plain javascript (or precompiled code) is supported.
 # Usage
 ```bash
 # Run one or more task modules:
-phylum <...task-modules>
+phylum [[--run] <...task-modules>]
 ```
++ `task-modules` - One or more task modules to run. Defaults to `"pipeline"`.
 
 ## Task modules
 A task module's default export must be a task implementation:
@@ -42,11 +43,13 @@ phylum example.js
 'use strict';
 
 const { Task } = require('@phylum/pipeline');
-const { getCommand } = require('@phylum/cli');
+const { ConfigTask } = require('@phylum/cli');
 
 exports.default = class MyTask extends Task {
 	async run() {
-		const command = getCommand(this);
+		// Get the results from the cli configuration task:
+		const {command} = await this.use(ConfigTask);
+
 		console.log(command.string('message', 'Hello World!'));
 	}
 }
