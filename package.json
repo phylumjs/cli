@@ -2,6 +2,7 @@
 	"name": "@phylum/cli",
 	"version": "4.0.0-beta.0",
 	"description": "Phylum cli",
+	"main": "./dist/index.js",
 	"bin": {
 		"phylum": "./dist/cli.js"
 	},
