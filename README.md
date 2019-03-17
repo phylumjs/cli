@@ -4,7 +4,8 @@
 ```bash
 npm i @phylum/cli @phylum/pipeline
 ```
-*The phylun cli requires node 10 or later*
+*The phylun cli requires node 10 or later*<br>
+*Global installation is not supported yet*
 
 ## Language Support
 Currently, only plain javascript (or precompiled code) is supported.
