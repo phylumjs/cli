@@ -1,10 +1,17 @@
 #!/usr/bin/env node
 
-import { Container } from '@phylum/pipeline';
-import { MainTask } from './tasks/main';
+import { dispose } from '@phylum/pipeline';
+import mainTask from './main-task';
 
-const mainContainer = new Container();
-const mainTask = mainContainer.get(MainTask);
+process.on('unhandledRejection', error => {
+	console.error(error);
+	process.exit(1);
+});
+
+process.on('uncaughtException', error => {
+	console.error(error);
+	process.exit(1);
+});
 
 mainTask.pipe(state => state.then(() => {
 	process.exitCode = 0;
@@ -13,4 +20,12 @@ mainTask.pipe(state => state.then(() => {
 	process.exitCode = 1;
 }));
 
-mainTask.activate();
+let current = mainTask.start();
+process.on('SIGINT', () => {
+	if (current) {
+		dispose(current);
+		current = null;
+	} else {
+		process.exit(1);
+	}
+});
