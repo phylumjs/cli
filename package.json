@@ -1,6 +1,6 @@
 {
 	"name": "@phylum/cli",
-	"version": "4.0.0-beta.5",
+	"version": "4.0.0",
 	"description": "Phylum cli",
 	"main": "./dist/index.js",
 	"bin": {
@@ -21,7 +21,7 @@
 		"fs-extra": "^7.0.1"
 	},
 	"devDependencies": {
-		"@phylum/pipeline": "^4.0.0-beta.20",
+		"@phylum/pipeline": "^4.0.0",
 		"ava": "^1.4.1",
 		"concurrently": "^4.1.0",
 		"nyc": "^13.3.0",
@@ -29,7 +29,7 @@
 		"typescript": "^3.4.1"
 	},
 	"peerDependencies": {
-		"@phylum/pipeline": "^4.0.0-beta.20"
+		"@phylum/pipeline": "^4.0.0"
 	},
 	"author": "Max J. Polster",
 	"license": "MIT"
