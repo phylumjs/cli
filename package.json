@@ -31,6 +31,7 @@
 	"peerDependencies": {
 		"@phylum/pipeline": "^4.0.0"
 	},
+	"repository": "github:phylumjs/cli",
 	"author": "Max J. Polster",
 	"license": "MIT"
 }
