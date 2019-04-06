@@ -9,27 +9,25 @@
 	"scripts": {
 		"compile": "rimraf dist && tsc",
 		"compile:watch": "rimraf dist && tsc -w",
-		"test": "npm run compile && nyc -- ava -v",
-		"test:watch": "npm run compile && concurrently -n tsc,ava \"tsc -w\" \"ava -w -v\"",
 		"prepack": "npm run compile"
 	},
 	"dependencies": {
-		"@phylum/command": "^1.1.0",
+		"@phylum/command": "^1.1.1",
 		"@types/command-line-args": "^5.0.0",
 		"@types/fs-extra": "^5.0.5",
 		"@types/node": "^10.14.4",
 		"fs-extra": "^7.0.1"
 	},
 	"devDependencies": {
-		"@phylum/pipeline": "^4.0.0",
+		"@phylum/pipeline": "^4.0.4",
 		"ava": "^1.4.1",
 		"concurrently": "^4.1.0",
 		"nyc": "^13.3.0",
 		"rimraf": "^2.6.3",
-		"typescript": "^3.4.1"
+		"typescript": "^3.4.2"
 	},
 	"peerDependencies": {
-		"@phylum/pipeline": "^4.0.0"
+		"@phylum/pipeline": "^4.0.2"
 	},
 	"repository": "github:phylumjs/cli",
 	"author": "Max J. Polster",
