@@ -13,22 +13,20 @@ npx phylum [[--run] <modulePath>]
 
 ## Entry module
 The entry module must be a commonjs module that exports a task instance as default:
-```js
-'use strict';
-
+```ts
 const { Task } = require('@phylum/pipeline');
 
-exports.default = new Task(async () => {
+export.default = new Task(async () => {
 	console.log('Hello World!');
 });
 ```
 
 ## Arguments
 The entry module can also export an array of [argument specs](https://github.com/phylumjs/command) for parsing custom command line arguments:
-```js
+```ts
 const { config } = require('@phylum/cli');
 
-exports.default = new Task(async t => {
+exports.default = new Task<void>(async t => {
 	// Access parsed arguments:
 	const {command} = await t.use(config);
 	console.log(command.message);
