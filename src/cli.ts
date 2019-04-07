@@ -15,10 +15,9 @@ import { fork } from 'child_process';
 	});
 	let command = spec.parse(argv, {partial: true});
 
-	const current = __filename;
 	const local = await resolve('@phylum/cli/dist/cli');
-	if (local !== current) {
-		const proc = fork(local, process.argv, {
+	if (local !== __filename) {
+		const proc = fork(local, process.argv.slice(2), {
 			cwd: process.cwd(),
 			stdio: [0, 1, 2, 'ipc']
 		});
