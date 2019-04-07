@@ -3,11 +3,14 @@
 ## Usage
 ```bash
 npm i @phylum/cli @phylum/pipeline
+
+# Optional global installation:
+npm i -g @phylum/cli
 ```
 
 ```bash
 # Basic usage:
-npx phylum [[--run] <modulePath>]
+phylum [[--run] <modulePath>]
 ```
 + `--run` - Specify the entry module that exports the task to run. Default is `./pipeline`
 
@@ -37,9 +40,9 @@ exports.args = [
 ];
 ```
 ```bash
-npx phylum
+phylum
 # => Hello World!
 
-npx phylum --message "Foo!"
+phylum --message "Foo!"
 # => Foo!
 ```
