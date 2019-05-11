@@ -12,11 +12,16 @@ import { fork } from 'child_process';
 		name: 'mainTask',
 		defaultFallback: true,
 		defaultValue: './pipeline'
+	}).add({
+		name: 'cliModule',
+		defaultValue: '@phylum/cli/dist/cli'
 	});
 	let command = spec.parse(argv, {partial: true});
 
-	const local = await resolve('@phylum/cli/dist/cli');
-	if (local !== __filename) {
+	const local = await resolve(command.cliModule);
+	if (!local) {
+		throw new Error(`Unable to resolve cli module: ${command.cliModule}`);
+	} else if (local !== __filename) {
 		const proc = fork(local, process.argv.slice(2), {
 			cwd: process.cwd(),
 			stdio: [0, 1, 2, 'ipc']
