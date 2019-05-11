@@ -15,18 +15,18 @@
 		"@phylum/command": "^1.2.0",
 		"@phylum/pipeline": "^4.0.2",
 		"@types/command-line-args": "^5.0.0",
-		"@types/fs-extra": "^5.0.5",
-		"@types/node": "^10.14.4",
+		"@types/fs-extra": "^5.1.0",
+		"@types/node": "^10.14.6",
 		"@types/resolve": "0.0.8",
 		"fs-extra": "^7.0.1",
-		"resolve": "^1.10.0"
+		"resolve": "^1.10.1"
 	},
 	"devDependencies": {
 		"ava": "^1.4.1",
 		"concurrently": "^4.1.0",
-		"nyc": "^13.3.0",
+		"nyc": "^14.1.1",
 		"rimraf": "^2.6.3",
-		"typescript": "^3.4.2"
+		"typescript": "^3.4.5"
 	},
 	"peerDependencies": {
 		"@phylum/pipeline": "^4.0.2"
