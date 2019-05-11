@@ -1,6 +1,6 @@
 {
 	"name": "@phylum/cli",
-	"version": "4.2.3",
+	"version": "4.3.0",
 	"description": "Phylum cli",
 	"main": "./dist/index.js",
 	"bin": {
